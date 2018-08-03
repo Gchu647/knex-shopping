@@ -5,8 +5,8 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
+      database: 'shopping_site',
+      user:     'shopping_site_user',
       password: 'password'
     },
     pool: {
@@ -16,7 +16,7 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     },
-    debug: false
+    debug: true
   },
 
   staging: {
