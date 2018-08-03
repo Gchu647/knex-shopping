@@ -19,5 +19,5 @@ app.use('/products', products);
 app.use('/cart', cart);
 
 app.listen(PORT, ()=>{
-  process.stdout.write(`server is running on PORT: ${PORT}`);
+  process.stdout.write(`server is running on PORT: ${PORT} \r\n`);
 });
