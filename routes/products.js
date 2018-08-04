@@ -76,4 +76,19 @@ WHERE id = ?`, [title, description, inventory, price, id])
     .catch(err => res.status(400).send(err.message));
 });
 
+// delete an product that has the id
+router.delete('/:product_id', (req, res) => {
+  const id = req.params.product_id;
+
+  knex.raw('DELETE FROM products WHERE id = ? ;', [id])
+    .then(result => {
+      if(!result || !result.rowCount) {
+        throw new Error('Product is not deleted');
+      }
+      
+      res.send(`Product id(${id}) is deleted`);
+    })
+    .catch(err => res.status(400).send(err.message));
+});
+
 module.exports = router;
