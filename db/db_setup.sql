@@ -47,3 +47,8 @@ FROM cart
 INNER JOIN users ON users.id = cart.user_id
 INNER JOIN products ON products.id = cart.products_id
 WHERE users.id = 6;
+
+-- delete product from user's cart
+DELETE 
+FROM cart
+WHERE (cart.user_id = 2 AND cart.products_id = 2);
