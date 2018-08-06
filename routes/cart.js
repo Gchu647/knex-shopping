@@ -14,7 +14,7 @@ products.price
 FROM cart
 INNER JOIN users ON users.id = cart.user_id
 INNER JOIN products ON products.id = cart.products_id
-WHERE users.id = ? ;`, [userId])
+WHERE cart.user_id = ? ;`, [userId])
     .then(cart => {
       if(!cart || !cart.rowCount) {
         throw new Error('Cart not found');
@@ -29,9 +29,6 @@ WHERE users.id = ? ;`, [userId])
 router.post('/:user_id/:products_id', (req, res) => {
   const userId = parseInt(req.params.user_id);
   const productsId = parseInt(req.params.products_id);
-
-  console.log('userId ', userId);
-  console.log('productsId ', productsId);
 
   knex.raw(
 `INSERT INTO cart(user_id, products_id)
@@ -50,7 +47,7 @@ router.post('/:user_id/:products_id', (req, res) => {
 router.delete('/:user_id/:products_id', (req, res) => {
   const userId = parseInt(req.params.user_id);
   const productsId = parseInt(req.params.products_id);
-
+// One more check for parseInt
   knex.raw(
 `DELETE 
 FROM cart

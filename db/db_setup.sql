@@ -12,9 +12,6 @@ CREATE TABLE users (
   updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
-INSERT INTO users(email, password)
-VALUES ('superfigher@street.com', 'boomshaka');
-
 
 CREATE TABLE products (
   id  SERIAL PRIMARY KEY NOT NULL,
@@ -26,9 +23,6 @@ CREATE TABLE products (
   updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
-INSERT INTO products(title, description, inventory, price)
-VALUES ('bananas', 'keeps the doctors away', 10, 2);
-
 CREATE TABLE cart (
   id  SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id),
@@ -36,19 +30,3 @@ CREATE TABLE cart (
   created_at TIMESTAMP NOT NULL DEFAULT now(),
   updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
-
--- user adds something to the cart
-INSERT INTO cart(user_id, products_id)
-VALUES (2, 2);
-
--- get all the products from user id 6
-SELECT users.email ,products.*
-FROM cart
-INNER JOIN users ON users.id = cart.user_id
-INNER JOIN products ON products.id = cart.products_id
-WHERE users.id = 6;
-
--- delete product from user's cart
-DELETE 
-FROM cart
-WHERE (cart.user_id = 2 AND cart.products_id = 2);
